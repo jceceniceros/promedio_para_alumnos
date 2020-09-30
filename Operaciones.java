@@ -6,15 +6,31 @@ public class Operaciones {
 
     private String participante;
     private int calif[] = new int[5];
-    private String estado;
-    private float promedio;
-
-    public float calcular_promedio(int[] calif) {
+    
+    //private String estado;
+    // El atributo "estado" lo podemos cambiar a char porque consiste en una sola letra
+    private char estado;
+    
+    //private float promedio;
+    // Para mantener el programa simple podemos trabajar "promedio" como un entero
+    private int promedio;
+    
+    //public float calcular_promedio(int[] calif) {
+    // El método esta correctamente declarado
+    // pero podemos eliminar el parámetro int[] calif
+    // y usar el atributo de la clase que declaraste en la línea 8
+    // también podemos no regresar nada (void) y asignar el promedio
+    // al atributo "promedio" de la clase (linea 16)
+    public void calcular_promedio() {
         Scanner scaner = new Scanner(System.in);
-        this.calif = calif;
-
+        
+        //this.calif = calif;
+        // Ya no es necesario usar this, porque el parámetro ya no existe en la firma del método, se elimino (línea 24)
+        
         int suma = 0;
-        float promedio;
+        
+        //float promedio;
+        // Ya no es necesario porque usaremos el atributo "promedio" de la clase (linea 16)
 
         System.out.println("Primera Calificacion:\n ");
         calif[0] = scaner.nextInt();
@@ -30,13 +46,17 @@ public class Operaciones {
         for (int i = 0; i < calif.length; i++) {
             suma += calif[i];
         }
-        promedio = (suma / calif.length);
+        promedio = (suma / calif.length); // Se asigna a "promedio" línea 16
 
-        return promedio;
+        //return promedio;
+        // Ya no es necesario porque no estamos regresando nada en la firma del método (void) (línea 24)
     }
 
-    public <promedio> void evaluar_estado(promedio) {
-
+    //public <promedio> void evaluar_estado(promedio) {
+    // El método está bien, solo no debe ir <promedio> ya que void indica que no se va a regresar nada
+    // También podemos eliminar el parámetro promedio para utilizar el atributo de la clase (línea 16)
+    public void evaluar_estado() {
+       /*
         if (promedio > 50 &&<=60){
             estado = "E";
         }else {
@@ -58,14 +78,34 @@ public class Operaciones {
                                   }else {
                                      estado = "F";
                                           }
-        return;
+        */
+        // Aquí hay que modificar el bloque completo
+        // los rangos de las condiciones estan perfectos, pero hay que refactorizar
+        // observa como cada condición debe evaluar "promedio" tanto a la derecha como a la izquierda
+        // También usaremos los ejemplos del tema 7 para restructurar los if-else-if-else
+        if (promedio > 50 && promedio <= 60){
+            estado = 'E';
+        } else if (promedio > 60 && promedio <= 70) {
+            estado = 'D';
+        } else if (promedio > 70 && promedio <= 80) {
+            estado = 'C';
+        } else if (promedio > 80 && promedio <= 90) {
+            estado = 'B';
+        } else if (promedio > 90 && promedio <= 100) {
+            estado = 'A';
+        } else {
+            estado = 'F';
+        }
+        
+        //return;
+        // Ya no es necesario porque no regresamos nada (void) (línea 58)
     }
 
 
     public void mostrar_mensajes(){
-        Scanner nom=  new Scanner(System.in);
+        Scanner nom = new Scanner(System.in);
         System.out.println("Ingresar Nombre del Participante:");
-        participante =nom.nextLine();
+        participante = nom.nextLine();
 
         System.out.println("Calificacion 1:"+calif[0]);
 
@@ -77,14 +117,14 @@ public class Operaciones {
 
         System.out.println("Calificacion 5:"+calif[4]);
 
-        System.out.println("Promedio: " +promedio);
+        System.out.println("Promedio: " + promedio);
 
-        System.out.println("Calificacion: " +evaluar_estado());
-
+        //System.out.println("Calificacion: " + evaluar_estado());
+        // Se debe imprimir el atributo "estado" que se asigna al llamar evaluar_estado
+        System.out.println("Calificacion: " + estado);
     }
 
-
-    }
+}
 
 
 
